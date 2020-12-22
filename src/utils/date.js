@@ -1,6 +1,6 @@
 import moment from "moment";
 
-export function formDatetime(row, column) {
+export function dateTimeFormat(row, column) {
     let date = row[column.property];
     if (date == undefined) {
         return "";
@@ -8,7 +8,7 @@ export function formDatetime(row, column) {
     return moment(date).format("YYYY-MM-DD HH:mm:ss");
 }
 
-export function formData(row, column) {
+export function dateFormat(row, column) {
     let date = row[column.property];
     if (date == undefined) {
         return "";

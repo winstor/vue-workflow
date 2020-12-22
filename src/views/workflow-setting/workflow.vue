@@ -45,6 +45,7 @@
 
 <script>
     import {deepClone} from '@/utils'
+    import { dateTimeFormat } from "@/utils/date"
     import {getList, getDetail, create, update, destroy} from '@/api/workflow/workflow'
     import {getList as getPackageList} from '@/api/workflow/package'
 
@@ -135,19 +136,10 @@
                     console.error(err)
                 })
             },
+            //时间格式转换
             dateFormat:function(row,column){
-                var date = row[column.property];
-                if(date === undefined){
-                    return ''
-                }
-                date = new Date(date);
-                let myyear = date.getFullYear();
-                let mymonth = date.getMonth() + 1;
-                let myweekday = date.getDate();
-                let myHour = date.getHours();
-                let myMin = date.getMinutes();
-                let mySec = date.getSeconds();
-                return myyear+'-'+mymonth+'-'+myweekday+' '+myHour + ':'+myMin+':'+mySec
+                let time = dateTimeFormat(row, column);
+                return time;
             },
 
         }
