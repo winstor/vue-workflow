@@ -1,22 +1,8 @@
 import request from '@/utils/workflow-request'
 
-export function getFieldList(id) {
-    return request({
-        url: `/workflow/field/${id}`,
-        method: 'get'
-    })
-}
-
 export function getApplyList(id) {
     return request({
-        url: `/workflow/apply/${id}`,
-        method: 'get'
-    })
-}
-
-export function getList() {
-    return request({
-        url: '/workflow',
+        url: `/workflow-apply/${id}`,
         method: 'get'
     })
 }
@@ -28,9 +14,9 @@ export function getDetail(id) {
     })
 }
 
-export function create(data) {
+export function createWorkflowApply(id,data) {
     return request({
-        url: '/workflow',
+        url: `/workflow-apply/${id}`,
         method: 'post',
         data
     })

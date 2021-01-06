@@ -1,4 +1,5 @@
 import { login, logout, getInfo } from '@/api/user'
+import { getWorkflowRouters } from '@/api/workflow/routers'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import router, { resetRouter } from '@/router'
 import routerFormat from '@/utils/router'
@@ -78,7 +79,41 @@ const actions = {
       })
     })
   },
-
+  getWorkflowRouters({commit}) {
+      return new Promise((resolve, reject) => {
+          getWorkflowRouters().then(response => {
+              const {data} = response
+              if (!data) {
+                  reject('Verification failed, please Login again.')
+              }
+              const { groups } = data
+              let routers = []
+              groups.forEach(function(group){
+                  let router ={
+                      path: '/workflow',
+                      component: "Layout",
+                      meta: {title: group.name, icon: "dashboard"},
+                      children: []
+                  };
+                  group.children.forEach(function(children){
+                      router.children.push({
+                          path: '/workflow/' + children.id,
+                          name:"workflowApplyList",
+                          component: "workflow",
+                          meta: {
+                              title: children.name,
+                          }
+                      })
+                  })
+                  routers.push(router)
+              })
+              commit('SET_ROUTERS',routers)
+              resolve(data)
+          }).catch(error => {
+              reject(error)
+          })
+      })
+  },
   // user logout
   logout({ commit, state, dispatch }) {
     return new Promise((resolve, reject) => {

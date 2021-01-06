@@ -1,5 +1,13 @@
 import request from '@/utils/user-request'
 
+
+export function getUserAllList() {
+    return request({
+        url: '/users/all',
+        method: 'get',
+    })
+}
+
 export function login(data) {
     return request({
         url: '/user/login',

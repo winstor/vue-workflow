@@ -16,8 +16,20 @@
 						</el-table-column>
 						<el-table-column align="center" label="更新时间"  prop="updated_at" :formatter="dateFormat">
 						</el-table-column>
-						<el-table-column align="center" label="操作" width="300">
+						<el-table-column align="center" label="操作" width="400">
 								<template slot-scope="scope">
+										<router-link :to="'/workflow-setting/workflow/form/'+scope.row.id" class="link-type">
+												<el-button type="primary" size="small" icon="el-icon-edit">
+														表单设置
+												</el-button>
+										</router-link>
+										&nbsp;&nbsp;&nbsp;&nbsp;
+										<router-link :to="'/workflow-setting/workflow/node/'+scope.row.id" class="link-type">
+												<el-button type="primary" size="small" icon="el-icon-edit">
+														流程设置
+												</el-button>
+										</router-link>
+										&nbsp;&nbsp;&nbsp;&nbsp;
 										<el-button type="primary" size="small" @click="handleEdit(scope)">编辑</el-button>
 										<el-button type="danger" size="small" @click="handleDelete(scope)">删除</el-button>
 								</template>

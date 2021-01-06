@@ -100,7 +100,7 @@ export const constantRoutes = [
   {
       path: '/workflow-setting',
       component: Layout,
-      name: 'workflow-setting',
+      name: 'workflowSetting',
       meta: {
           title: '流程配置',
           icon: 'el-icon-s-help'
@@ -111,22 +111,55 @@ export const constantRoutes = [
               component: () => import('@/views/workflow-setting/package'),
               name: 'workflowPackage',
               meta: { title: '流程包管理' }
-          },
-          {
+          }, {
               path: 'workflow',
               component: () => import('@/views/workflow-setting/workflow'),
               name: 'workflowList',
               meta: { title: '流程管理'}
-          },
-          {
-              path: 'package/edit/:id(\\d+)',
-              component: () => import('@/views/workflow-setting/package-edit'),
-              name: 'editPackage',
-              meta: { title: 'editPackage', noCache: true, activeMenu: '/workflow-setting/package' },
+          }, {
+              path: 'apply',
+              component: () => import('@/views/workflow-setting/apply'),
+              name: 'applyList',
+              meta: { title: '申请列表'}
+          }, {
+              path: 'workflow/form/:id(\\d+)',
+              component: () => import('@/views/workflow-setting/workflow-form'),
+              name: 'settingWorkflowForm',
+              meta: { title: '表单设置', noCache: true, activeMenu: '/workflow-setting/workflow-form' },
+              hidden: true
+          },{
+              path: 'workflow/node/:id(\\d+)',
+              component: () => import('@/views/workflow-setting/workflow-node'),
+              name: 'settingWorkflowNode',
+              meta: { title: '流程设置', noCache: true, activeMenu: '/workflow-setting/workflow-node' },
               hidden: true
           }
       ]
-  }
+  },
+    {
+        path: '/workflow-apply',
+        component: Layout,
+        name: 'workflowApply',
+        meta: {
+            title: '申请列表',
+        },
+        hidden: true,
+        children: [
+            {
+                path: '/workflow/:workflow_id(\\d+)/apply-create',
+                name: 'create',
+                meta: { title: '添加申请'},
+                component: () => import('@/views/workflow/apply/create'),
+                hidden: true
+            }, {
+                path: '/workflow/:workflow_id(\\d+)/apply/edit/:id(\\d+)',
+                name: 'edit',
+                meta: { title: '编辑申请'},
+                component: () => import('@/views/workflow/index'),
+                hidden: true
+            },
+        ]
+    }
 ]
 
 /**
